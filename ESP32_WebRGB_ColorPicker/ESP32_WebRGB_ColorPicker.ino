@@ -12,10 +12,11 @@ CREATE_ESP32_WS2812_INSTANCE();
 AsyncWebServer server(80);
 
 // ssid/password match your WiFi Network
-const char* ssid = "ssid";
-const char* password = "password";
+const char* ssid = "Actiontec-8318-2.4G";
+const char* password = "e3d9dd3c";
 
 const char* Param_COLOR ="color";
+unsigned int count = 0;
 
 // HTML
 const char index_html[] PROGMEM = R"rawliteral(
@@ -68,9 +69,9 @@ void setup() {
 
     //check if parameter "color" found
     if (request->hasParam(Param_COLOR)) {
-      Serial.println("param_COLOR received");
+      Serial.print("param_COLOR received:  ");
       color_value = request->getParam(Param_COLOR)->value();
-      Serial.println(color_value);
+      Serial.print(color_value);
 
       //Convert intMessage in #rrggbb form to r,g,b
       color_value.remove(0, 1);
@@ -78,12 +79,17 @@ void setup() {
       int r = (intColor & 0xff0000)>>16;
       int g = (intColor & 0x00ff00)>>8;
       int b = (intColor & 0x0000ff);
-      Serial.println(r);
-      Serial.println(g);
+      Serial.write(" = ");
+      Serial.print(r);
+      Serial.write(",");
+      Serial.print(g);
+      Serial.write(",");
       Serial.println(b);
 
       //set NeoPixel color
       ESP32_LED(r,g,b);
+      // tell loop to cool it for awhile
+      count = 0;
     }
     
     else {
@@ -107,5 +113,15 @@ long hstol(String recv){
 }
 
 void loop() {
-  
+  if(count > 40)
+    count =  11;	// loop colors here
+  if (count > 30)
+    ESP32_LED(0,0,100);
+  else if (count > 20)
+    ESP32_LED(0,100,0);
+  else if (count > 10)
+    ESP32_LED(100,0, 0);
+  else delay(200);	// hold web colors longer
+  delay(100);
+  count++;
 }

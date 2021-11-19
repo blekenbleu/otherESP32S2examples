@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #slidecontainer {
+    width: 100%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    -webkit-transform: rotate(270deg);
+    width: 350px;
+    height: 10px;
+  position:relative;
+    top:50%;
+    left:50%;
+    left:-180px;
+    margin-right:-320px;
+    top:300px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+}
+    </style>
+    <script src="/scripts/snippet-javascript-console.min.js?v=1"></script>
+</head>
+<body>
+    <h3 style="color:blue;">Live slider</h3>
+
+<FORM action="/" method="post" id="form">
+<P>
+<label for="Red">&nbspR</label>
+<input type="range" name="colorR" min="0" max="100" value="50" class="slider" id="Red">
+<label for="Green">&nbspG</label>
+<input type="range" name="colorG" min="0" max="100" value="50" class="slider" id="Green">
+<label for="Blue">&nbspB</label>
+<input type="range" name="colorB" min="0" max="100" value="50" class="slider" id="Blue">
+<p><span id="demoR"></span>%</p>
+</P>
+</FORM>
+    <script type="text/javascript">
+        var sliderR = document.getElementById("Red");
+        var outR = document.getElementById("demoR");
+        outR.innerHTML = sliderR.value;
+
+slider.oninput = function() {
+  output.innerHTML = this.value;
+}
+
+slider.onmouseup = function () {
+  document.getElementById("form").submit();
+}
+    </script>
+</body>
+</html>
