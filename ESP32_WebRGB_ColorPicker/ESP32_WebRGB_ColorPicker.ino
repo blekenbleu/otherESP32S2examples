@@ -3,10 +3,8 @@
 #include <WiFi.h>
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
-//#include <Adafruit_NeoPixel.h>
 #include "esp32s2LED.h"
 
-//Onboard RGB LED (NeoPixel)
 CREATE_ESP32_WS2812_INSTANCE();
 
 AsyncWebServer server(80);
@@ -21,7 +19,7 @@ unsigned int count = 0;
 // HTML
 const char index_html[] PROGMEM = R"rawliteral(
 <!DOCTYPE HTML><html><head>
-  <title>ESP32-S2 exercise</title>
+  <title>ESP32_WebRGB_ColorPicker</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   </head><body>
   <p>Select Color</p>
@@ -38,10 +36,10 @@ void notFound(AsyncWebServerRequest *request) {
 
 void setup() {
   Serial.begin(115200);
-  Serial.println("---Start---");
-  Serial.println("Chip Model: ");
+  Serial.println("--- ESP32_WebRGB_ColorPicker Start---");
+  Serial.print("Chip Model: ");
   Serial.println(ESP.getChipModel());
-  Serial.println("\nChip Revision: ");
+  Serial.print("\nChip Revision: ");
   Serial.println(ESP.getChipRevision());
   Serial.println();
   
