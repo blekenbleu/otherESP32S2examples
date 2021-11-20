@@ -40,35 +40,33 @@ void setup() {
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
   if (WiFi.waitForConnectResult() != WL_CONNECTED) {
-    Serial.println("WiFi Failed!");
+    Serial.write("WiFi Failed!\n");
     return;
   }
-  Serial.println();
-  Serial.print("Visit IP Address: ");
+  Serial.write("\nVisit IP Address: ");
   Serial.println(WiFi.localIP());
 
   // Send HTML
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send_P(200, "text/html", index_html);
+    Serial.write("index_html sent\n");
   });
 
   // Send a GET request to <ESP_IP>/get?color=rr -or- gg -or- bb
   server.on("/get", HTTP_GET, [] (AsyncWebServerRequest *request) {
     String color_value, id_value;
-
-    //check if parameter "color" found
-    if (request->hasParam(Param_COLOR)) {
-      Serial.print("param_COLOR received:  ");
+    bool change = request->hasParam(Param_COLOR); // if parameter "color" found
+    
+    if (change) {
+      Serial.write("param_COLOR received:  ");
       color_value = request->getParam(Param_COLOR)->value();
       Serial.println(color_value);
       // color_value.remove(0, 1);  // remove '#' ??
       if (request->hasParam(Param_ID)) {
-        Serial.print("param_ID received:  ");
+        Serial.write("param_ID received:  ");
         id_value = request->getParam(Param_ID)->value();
-        Serial.print(id_value);
         char c[id_value.length() + 1];
         id_value.toCharArray(c, id_value.length() + 1);
-        Serial.write(" = ");
         Serial.println(c);
         //Convert intMessage to int
         int intColor = stol(color_value);
@@ -79,25 +77,28 @@ void setup() {
         else if ('2' == c[1])
           b = intColor;
         else {
+          change = false;
           Serial.write("param_COLOR ignored for Param_ID = ");
           Serial.println(c);
         }
-        Serial.write("Setting ESP32_LED(");
-        Serial.print(r);
-        Serial.write(",");
-        Serial.print(g);
-        Serial.write(",");
-        Serial.print(b);
-        Serial.write(")\n");
+        if (change) {
+          Serial.write("Setting ESP32_LED(");
+          Serial.print(r);
+          Serial.write(",");
+          Serial.print(g);
+          Serial.write(",");
+          Serial.print(b);
+          Serial.write(")\n");
 
-        //set NeoPixel color
-        ESP32_LED(r,g,b);
+          //set NeoPixel color
+          ESP32_LED(r,g,b);
+        }
         // tell loop to cool it for awhile
         count = 0;
       }
-      else Serial.println("param_ID NOT received; ignoring param_COLOR");
+      else Serial.write("param_ID NOT received; ignoring param_COLOR\n");
     }
-    else Serial.println("param_COLOR NOT found");
+    else Serial.write("param_COLOR NOT found\n");
   });        // server.on("/get"...)
   server.onNotFound(notFound);
   server.begin();
@@ -114,12 +115,12 @@ void loop() {
   if(count > 40)
     count =  11;	// loop colors here
   if (count > 30)
-    ESP32_LED(0,0,5);   // blue is dimmer
+    ESP32_LED(0,0,4);   // blue is dimmer
   else if (count > 20)
     ESP32_LED(0,1,0);    // plenty bright
   else if (count > 10)
-    ESP32_LED(1,0, 0);
-  else delay(200);	// hold web colors longer
+    ESP32_LED(3,0, 0);
+  else delay(400);	// hold web colors longer
   delay(100);
   count++;
 }
