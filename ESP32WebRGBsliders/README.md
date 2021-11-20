@@ -5,3 +5,5 @@
 
 This sketch makes available HTML which, when loaded by a browser, is not reloaded between slider changes.  
 Consequently, resulting WS2812 color is not fully determined until after the first 3 sliders have been set.  
+
+For context, see: [Arduino and ESP32-S2-Saola-1](https://blekenbleu.github.io/ESP32)  
