@@ -112,15 +112,15 @@ long stol(String recv){
 }
 
 void loop() {
-  if(count > 40)
+  if(count > (10+r+g+b))
     count =  11;	// loop colors here
-  if (count > 30)
-    ESP32_LED(0,0,b);   // blue is dimmer
-  else if (count > 20)
-    ESP32_LED(0,g,0);    // plenty bright
+  if (count > (10+r+g))
+    ESP32_LED(0,0,count-(10+r+g));   // blue is dimmer
+  else if (count > 10+r)
+    ESP32_LED(0,count-(10+r),0);     // plenty bright
   else if (count > 10)
-    ESP32_LED(r,0, 0);
-  else delay(400);	// hold web colors longer
-  delay(100);
+    ESP32_LED(count - 10,0, 0);
+  else delay(800);	     // hold web colors longer
+  delay(300);
   count++;
 }

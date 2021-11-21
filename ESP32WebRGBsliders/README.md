@@ -4,6 +4,10 @@
   .. thanks to `xmlhttprequest` hint from @sierses   
 
 This sketch makes available HTML which, when loaded by a browser, is not reloaded between slider changes.  
-Consequently, resulting WS2812 color is not fully determined until after the first 3 sliders have been set.  
+Only sliders V0 - V2 are used by this sketch;   
+resulting WS2812 colors may not match browser values until after changing those 3 sliders.  
+Based on results with this sketch,  
+an ESP32-S2-Saola-1 WS2812 has less than 9 usefully different brightness levels for each primary.  
+  
 
 For context, see: [Arduino and ESP32-S2-Saola-1](https://blekenbleu.github.io/ESP32)  

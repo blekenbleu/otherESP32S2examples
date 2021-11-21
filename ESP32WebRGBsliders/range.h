@@ -36,8 +36,8 @@ input[type=range]:hover {
 <body onload="oV()">
 
     <h3 style="color:blue;">Live slider[s]</h3>
-    <i>returns value on mouse lift; from:
- <a href="https://stackoverflow.com/questions/47297889/how-to-submit-slider-value-when-user-change-its-value-without-any-buttons">stack overflow</a></i><br>
+    <i>return values on mouse lifts; see:
+ <a href="https://github.com/blekenbleu/otherESP32S2examples/tree/main/ESP32WebRGBsliders">ESP32WebRGBsliders</a></i><br>
 
     <FORM action="/get" method="get" id="sliders">
     <P>
