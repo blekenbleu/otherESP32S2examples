@@ -41,9 +41,9 @@ input[type=range]:hover {
 
     <FORM action="/get" method="get" id="sliders">
     <P>
-    <input type="range" value="50" id="s0" oninput="pV(this.id)" onchange="gV(this.id)"> V0: <input id="os0" /><br>
-    <input type="range" value="50" id="s1" oninput="pV(this.id)" onchange="gV(this.id)"> V1: <input id="os1" /><br>
-    <input type="range" value="50" id="s2" oninput="pV(this.id)" onchange="gV(this.id)"> V2: <input id="os2" /><br>
+    <input type="range" value="5" id="s0" oninput="pV(this.id)" onchange="gV(this.id)"> V0: <input id="os0" /><br>
+    <input type="range" value="2" id="s1" oninput="pV(this.id)" onchange="gV(this.id)"> V1: <input id="os1" /><br>
+    <input type="range" value="8" id="s2" oninput="pV(this.id)" onchange="gV(this.id)"> V2: <input id="os2" /><br>
     <input type="range" value="50" id="s3" oninput="pV(this.id)" onchange="gV(this.id)"> V3: <input id="os3" /><br>
     <input type="range" value="50" id="s4" oninput="pV(this.id)" onchange="gV(this.id)"> V4: <input id="os4" /><br>
     <input type="range" value="50" id="s5" oninput="pV(this.id)" onchange="gV(this.id)"> V5: <input id="os5" /><br>

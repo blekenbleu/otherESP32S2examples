@@ -16,7 +16,7 @@ const char* password = "e3d9dd3c";
 const char* Param_COLOR ="color";
 const char* Param_ID = "id";
 unsigned int count = 0;
-int r = 50, g = 50, b = 50;
+int r = 5, g = 2, b = 8;
 
 // HTML: rename to range.htm to test in browsers
 #include "range.h"	// const char index_html[]
@@ -115,11 +115,11 @@ void loop() {
   if(count > 40)
     count =  11;	// loop colors here
   if (count > 30)
-    ESP32_LED(0,0,4);   // blue is dimmer
+    ESP32_LED(0,0,b);   // blue is dimmer
   else if (count > 20)
-    ESP32_LED(0,1,0);    // plenty bright
+    ESP32_LED(0,g,0);    // plenty bright
   else if (count > 10)
-    ESP32_LED(3,0, 0);
+    ESP32_LED(r,0, 0);
   else delay(400);	// hold web colors longer
   delay(100);
   count++;
